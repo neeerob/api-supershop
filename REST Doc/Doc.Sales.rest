@@ -1,0 +1,94 @@
+##########################################
+###          Sales Module             ####
+##########################################
+
+
+## module name: Sales
+## Mdule Code: 1.3
+## Method: Register Sales
+## Method Code: 1.3.1
+## Technical Description: This method allows you to register a new sale in the system. It updates product stock quantities, records the sale details, and calculates profits. It is designed to be accessed via a POST request to the appropriate endpoint.
+
+## 200 is discount for that sale (this is optional)
+POST http://localhost:5000/sales/registerSales/200
+content-type: application/json
+
+{
+    "productId" : "64f6d3757394d14786e2c23e",
+    "quantitySold" : 13,
+    "salePrice" : 65000
+}
+
+## Usecase: The "Register Sales" method is used to record sales transactions in the system, updating both product stock quantities and sales records. It supports the inclusion of optional discounts and ensures accurate financial tracking.
+## note: 
+    ## - Ensure that the Content-Type header in the HTTP request is set to application/json to indicate that the request body is in JSON format.
+    ## - The provided JSON request body should adhere to the expected format, including valid data types and values for each field.
+
+## Technical details: 
+    ## This function retrieves the product details, checks if there is sufficient stock, and updates stock quantities accordingly. It then records the sale in the Sales collection, calculating profits and sales metrics. If successful, it returns a response with sale details. In case of any errors, it provides appropriate error responses.
+
+
+
+###
+## module name: Sales
+## Mdule Code: 1.3
+## Method: Monthly Sales Report
+## Method Code: 1.3.2
+## Technical Description: This method generates a monthly sales report, aggregating sales data by month and product. It calculates total revenue, units sold, and profits. It is accessed via a GET request to the appropriate endpoint.
+
+GET http://localhost:5000/sales/monthlysalesreport HTTP/1.1
+
+## Usecase: The "Monthly Sales Report" method provides valuable insights into monthly sales performance, helping businesses track trends and make data-driven decisions.
+## note: 
+    ## - N/A
+
+## Technical details: 
+    ## This function uses aggregation to group sales data by month and product. It calculates key metrics such as total revenue, units sold, and profits for each month. The results are returned as a comprehensive monthly sales report.
+
+
+
+###
+## module name: Sales
+## Mdule Code: 1.3
+## Method: Yearly Sales Report
+## Method Code: 1.3.3
+## Technical Description: This method generates a yearly sales report, aggregating sales data by month and product. It calculates total revenue, units sold, and profits. It is accessed via a GET request to the appropriate endpoint.
+
+GET http://localhost:5000/sales/yearlysalesreport HTTP/1.1
+
+## Usecase: The "Yearly Sales Report" method provides valuable insights into yearly sales performance, helping businesses track trends and make data-driven decisions.
+## note: 
+    ## - N/A
+
+## Technical details: 
+    ## This function aggregates sales data by year and calculates key metrics such as total revenue, units sold, and profit. The results are returned as a comprehensive yearly sales report.
+
+
+
+###
+## module name: Sales
+## Mdule Code: 1.3
+## Method: Sales Report by Date
+## Method Code: 1.3.4
+## Technical Description: This method generates a sales report for a specific product within a date range.
+
+GET http://localhost:5000/sales/getSalesReportByDate HTTP/1.1
+content-type: application/json
+
+{
+  "productId": "64f6d77ff8a997c4594dec1c",
+  "startDate": "2023-01-01",
+  "endDate": "2023-12-31"
+}
+
+
+## Usecase: The "Sales Report by Date" method provides detailed sales information for a specific product within a specified date range.
+## note: 
+    ## - Ensure that you provide valid parameters including productId, startDate, and endDate.
+
+## Technical details: 
+    ## This function retrieves sales data for a specific product within the specified date range. It validates parameters, checks product existence, and returns the sales data.
+
+
+
+

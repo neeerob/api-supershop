@@ -1,0 +1,125 @@
+##########################################
+###          Receipt Module           ####
+##########################################
+
+
+
+## Mdule Code: 1.4
+## module name: Receipt
+## Method: Get All Receipt
+## Method Code: 1.4.1
+## Technical Description: This method retrieves all receipts in the system, excluding deleted receipts. It is accessed via a GET request to the appropriate endpoint.
+
+GET http://localhost:5000/receipt/getAllReceipt?page=1&pageSize=2 HTTP/1.1 
+
+## Usecase: The "Get All Receipts" method provides a comprehensive list of all receipts in the system, allowing for a full overview of sales transactions.
+
+##   Note: 
+    ## - N/A
+
+## Technical details
+    ## This function retrieves all receipts that have not been deleted from the database. It supports pagination by providing `page` and `pageSize` parameters in the URL.
+
+
+
+###
+## Mdule Code: 1.4
+## module name: Receipt
+## Method: Get Receipts by Date
+## Method Code: 1.4.2
+## Technical Description: This method allows you to retrieve receipts within a specified date range. It is designed to be accessed via a GET request to the appropriate endpoint.
+
+GET http://localhost:5000/receipt/getReceiptByDate HTTP/1.1 
+content-type: application/json
+
+{
+    "startDate": "2023-01-01",
+    "endDate": "2023-12-31"
+}
+
+## Usecase: The "Get Receipts by Date" method is used to retrieve receipts issued within a specified date range. It is useful for tracking sales transactions during specific time periods.
+
+##   Note: 
+    ## - Ensure that you provide valid `startDate` and `endDate`.
+
+## Technical details
+    ## This function queries the database for receipts based on the provided date range. It returns a list of receipts that match the criteria.
+
+
+
+###
+## Mdule Code: 1.4
+## module name: Receipt
+## Method: Get Receipt by Receipt Number
+## Method Code: 1.4.3
+## Technical Description: This method allows you to retrieve a specific receipt by its unique receipt number. It is accessed via a GET request with the receipt number as a parameter.
+
+## SCPT16940004059355870 is ID of a product
+GET http://localhost:5000/receipt/getReceiptByReceiptNumber/SCPT16940004059355870 HTTP/1.1 
+
+## Usecase: The "Get Receipt by Receipt Number" method is useful when you need to access detailed information about a specific receipt using its unique identifier.
+
+##   Note: 
+    ## - Provide an actual receipt number you want to retrieve.
+
+## Technical details
+    ## This function queries the database for the receipt with the specified receipt number and returns the receipt data.
+
+
+
+###
+## Mdule Code: 1.4
+## module name: Receipt
+## Method: Return Receipt
+## Method Code: 1.4.4
+## Technical Description: This method allows you to process returns for a receipt, undoing the associated sales and updating stock quantities. It is accessed via a POST request to the appropriate endpoint.
+
+## SCPT16940004059355870 is ID of a product
+GET http://localhost:5000/receipt/retrnPrdt/SCPT16939135064734804 HTTP/1.1 
+
+## Usecase: The "Return Receipt" method is used to process returns for a receipt, effectively reversing the associated sales and adjusting stock quantities accordingly.
+
+##   Note: 
+    ## - Ensure receipt ID is valid.
+    ## - Provide the receipt number in the request body to specify which receipt to return.
+
+## Technical details
+    ## This function retrieves the receipt by its receipt number, identifies the associated sales, and updates stock quantities. It marks the sales and the receipt as inactive and sets deletion dates. If successful, it returns a response indicating the returned receipt.
+
+
+
+###
+## Mdule Code: 1.4
+## module name: Receipt
+## Method: Create Receipt
+## Method Code: 1.4.5
+## Technical Description: This method allows you to create a new receipt by specifying a list of sales. It calculates the total amount, tax, and discounts for the receipt. It is accessed via a POST request to the appropriate endpoint.
+
+## SCPT16940004059355870 is ID of a product
+POST http://localhost:5000/receipt/crtrct HTTP/1.1 
+content-type: application/json
+
+[
+    {
+        "saleId":"64f855ca2bebcdba30e2c64b"
+    },
+    {
+        "saleId":"64f855ab2bebcdba30e2c646"
+    },
+    {
+        "saleId":"64f854a3c221c419f13612dc"
+    }
+    
+]
+
+## Usecase: The "Create Receipt" method is used to generate a new receipt for a set of sales. It calculates the total amount, tax, and discounts for the combined sales.
+
+##   Note: 
+    ## - Provide an array of sale IDs in the request body to create the receipt.
+
+## Technical details
+    ## This function validates the provided sale IDs, calculates the receipt's total amount, tax, and discounts, and creates a new receipt entry in the database. If any sale IDs are not found, it returns an error response.
+
+
+
+

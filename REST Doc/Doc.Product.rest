@@ -1,0 +1,124 @@
+##########################################
+###          Product Module           ####
+##########################################
+
+## Mdule Code: 1.1
+## module name: Product
+## Method: Get All product
+## Method Code: 1.1.1
+## Technical Description: This method allows you to retrieve a paginated list of all products available in the system. It is designed to be accessed via a GET request using the following URL. The URL includes the `page` and `pageSize` query parameters, which can be used for pagination. The `page` parameter specifies the page number, and the `pageSize` parameter determines the number of products to display per page.
+
+GET http://localhost:5000/product/all?page=1&pageSize=2 HTTP/1.1 
+
+## Usecase: The "Get All Products" method is useful when you need to retrieve a list of products from your system, typically for display in a user interface or for further processing. By providing pagination parameters, you can efficiently manage large datasets.
+
+##   Note: 
+    ## - If the `page` and `pageSize` parameters are not provided in the URL, the method will use default values. It will default to page 1 and a page size of 10 if no values are specified.
+    ## - The actual implementation of this method may involve database queries or other data retrieval mechanisms to fetch the products based on the provided parameters.
+
+## Technical details
+    ## This function retrieves a list of active products from the database, allowing pagination through the use of data parameters such as page and pageSize. 
+
+
+###
+## Module Name: Product
+## Mdule Code: 1.1
+## Method: Add product
+## Method Code: 1.1.2
+## Technical Description: This method allows you to add a product in database.
+
+POST  http://localhost:5000/product/add HTTP/1.1 
+content-type: application/json
+
+{
+    "productName": "Pen",
+    "description": " description pen - 2",
+    "price": 5,
+    "status": true,
+    "isActive": true,
+    "isDeleted": false,
+    "createDate": "2023-09-02T12:00:00Z",
+    "deleteDate": null
+}
+
+## Usecase: The "Add Product" method is useful when you need to insert a new product into your system's database. You can use this method to provide all the necessary product details and create a new product entry.
+
+##   Note: 
+    ## - Ensure that the Content-Type header in the HTTP request is set to application/json to indicate that the request body is in JSON format.
+    ## - The provided JSON request body should attached to the expected format, including valid data types and values for each field.
+
+## Technical details
+    ## This function facilitates the addition of new products to the system. It creates both a product entry and a corresponding stock record, ensuring consistency. Upon success, it returns a response containing the created product data, while also handling potential errors during this process.
+
+
+
+###
+## Module Name: Product
+## Module Code: 1.1
+## Method: Update Product
+## Method Code: 1.1.3
+## Technical Description: This method update a exissting product in database.
+
+
+## 64f71098810ca439775af62f is ID of a product
+PATCH http://localhost:5000/product/update/64f71098810ca439775af62f HTTP/1.1
+Content-Type: application/json
+
+{
+    "description": "Updated phone - 16"
+}
+
+## Usecase: The "Update Product" method is essential when you need to modify the attributes of an existing product in your system. It allows you to provide the updated information and ensures that product records remain up to date.
+
+##   Note: 
+   ## -  Ensure that the Content-Type header in the HTTP request is set to application/json to indicate that the request body is in JSON format.
+   ## -  The provided JSON request body should conform to the expected format, and put disered key and value you want to update.
+
+## Technical details
+    ## This service function facilitates the updating of existing products in the system. It uses the Product.findByIdAndUpdate method to modify the product data based on the provided id and updated details. Upon success, it returns a response containing the updated product data. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the update process, it provides an internal server error response.
+
+
+
+
+###
+## Module Name: Product
+## Module Code: 1.1
+## Method: Delete Product
+## Method Code: 1.1.4
+## Technical Description: This method allows you to mark a product as deleted in the system, effectively setting the `isDeleted` flag to true and recording the deletion date. It is designed to be accessed via a DELETE request to the following URL:
+
+## 64f71098810ca439775af62f is ID of a product
+DELETE http://localhost:5000/product/delete/64f71098810ca439775af62f HTTP/1.1
+
+## Usecase: The "Delete Product" method is useful when you want to logically remove a product from the system without permanently deleting its data. It sets the `isDeleted` flag to true and records the date of deletion, providing a way to track and manage deleted products while retaining historical data.
+
+##   Note: 
+    ## - The deletion of a product using this method is reversible, as it only marks the product as deleted without removing it from the database.
+    ## - Ensure that you have the appropriate authorization and permissions to perform deletion operations.
+
+## Technical details
+    ## This function utilizes the `Product.findByIdAndUpdate` method to update the product's `isDeleted` flag to true and record the deletion date. Upon successful execution, it returns a response containing the updated product data, confirming the deletion. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the deletion process, it provides an internal server error response.
+
+
+###
+## Module Name: Product
+## Module Code: 1.1
+## Method: Search Product by ID
+## Method Code: 1.1.5
+## Technical Description: This method allows you to search for a specific product in the system based on its unique identifier (ID). 
+
+GET http://localhost:5000/product/64f71098810ca439775af62f HTTP/1.1
+
+## Usecase: The "Search Product by ID" method is useful when you need to retrieve detailed information about a specific product in the system. It provides a quick and efficient way to access the product's data by its unique identifier.
+
+##   Note: 
+    ## - Ensure that the `{id}` parameter in the URL corresponds to a valid product ID in your database.
+    ## - The search operation will return a "not found" error if the specified product ID does not exist in the system.
+
+## Technical details
+    ## This function utilizes the `Product.findById` method to search for and retrieve the product based on the provided ID. Upon successful execution, it returns a response containing the product data. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
+
+
+
+
+

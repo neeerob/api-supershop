@@ -1,0 +1,87 @@
+##########################################
+###          Stock Module             ####
+##########################################
+
+## module name: Stock
+## Mdule Code: 1.2
+## Method: Get All product
+## Method Code: 1.2.1
+## Technical Description: This method allows you to retrieve a paginated list of all stock available in the system. It is designed to be accessed via a GET request using the following URL. The URL includes the `page` and `pageSize` query parameters, which can be used for pagination. The `page` parameter specifies the page number, and the `pageSize` parameter determines the number of products to display per page.
+
+GET http://localhost:5000/stock/all/?page=1&pageSize=3 HTTP/1.1 
+
+## Usecase: The "Get All Stock" method is useful when you need to retrieve a list of Stock from your system, typically for display in a user interface or for further processing. By providing pagination parameters, you can efficiently manage large datasets.
+
+##   Note: 
+    ## - If the `page` and `pageSize` parameters are not provided in the URL, the method will use default values. It will default to page 1 and a page size of 10 if no values are specified.
+    ## - The actual implementation of this method may involve database queries or other data retrieval mechanisms to fetch the stock based on the provided parameters.
+
+## Technical details
+    ## This function retrieves a list of active stock from the database, allowing pagination through the use of data parameters such as page and pageSize. 
+
+
+
+
+###
+## Module Name: Stock
+## Module Code: 1.2
+## Method: Search Stock by ID
+## Method Code: 1.2.2
+## Technical Description: This method allows you to search for a specific stock in the system based on its unique identifier (ID). 
+
+## 64f6d3947394d14786e2c244 is ID of a Stock
+GET http://localhost:5000/stock/byid/64f6d3947394d14786e2c244 HTTP/1.1
+
+## Usecase: The "Search Stock by ID" method is useful when you need to retrieve detailed information about a specific Stock in the system. It provides a quick and efficient way to access the Stock's data by its unique identifier.
+
+##   Note: 
+    ## - Ensure that the `{id}` parameter in the URL corresponds to a valid Stock ID in your database.
+    ## - The search operation will return a "not found" error if the specified Stock ID does not exist in the system.
+
+## Technical details
+    ## This function utilizes the `Stock.findById` method to search for and retrieve the Stock based on the provided ID. Upon successful execution, it returns a response containing the Stock data. If the specified Stock is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
+
+
+
+
+###
+## Module Name: Stock
+## Module Code: 1.2
+## Method: Search Stock by Product ID
+## Method Code: 1.2.3
+## Technical Description: This method allows you to search for a specific stock in the system based on Product's unique identifier (ID). 
+
+## 64f6d5a7cd1aa0404ae344df is ID of a product
+GET http://localhost:5000/stock/bypid/64f6d5a7cd1aa0404ae344df HTTP/1.1
+
+## Usecase: The "Search Stock by Product ID" method is useful when you need to retrieve detailed information about a specific product's Stock in the system. 
+
+##   Note: 
+    ## - Ensure that the `{id}` parameter in the URL corresponds to a valid Product ID in your database.
+    ## - The search operation will return a "not found" error if the specified Product ID does not exist in the system.
+
+## Technical details
+    ## This function search for and retrieve the Stock based on Product's ID. Upon successful execution, it returns a response containing the Stock data. If the specified Stock is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
+
+
+
+
+###
+## Module Name: Stock
+## Module Code: 1.2
+## Method: Update Stock
+## Method Code: 1.1.4
+## Technical Description: This method update a exissting Stock quantity in database.
+
+
+## 64f6d3757394d14786e2c23e is ID of a product
+PUT http://localhost:5000/stock/updateStock/64f6d5a7cd1aa0404ae344df/2 HTTP/1.1
+Content-Type: application/json
+
+## Usecase: The "Update Stock" method is essential when you need to modify the quantity of an existing product in your database. It allows you to provide the updated quantity and ensures that stock records remain up to date.
+
+##   Note: 
+   ## -  Ensure product Id exist in the database. 
+
+## Technical details
+    ## This service function facilitates the updating of existing quantity of a ptock products in the system. This modify the product quantity in stock database based on the provided product's id . Upon success, it returns a response containing the updated stock data. If the specified product and stock is not found, it responds with a "not found" error. In case of any other errors during the update process, it provides an internal server error response.
