@@ -89,6 +89,3 @@ content-type: application/json
 ## Technical details: 
     ## This function retrieves sales data for a specific product within the specified date range. It validates parameters, checks product existence, and returns the sales data.
 
-
-
-
