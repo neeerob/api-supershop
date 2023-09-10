@@ -81,6 +81,46 @@ describe('Product Service', () => {
         
     });
 
+    describe('Giving incorreect Product details', () => {
+        it('Should not return a product', async function() {
+            this.timeout(10000);
+        
+            const data = {
+                "price": 5,
+                "status": true,
+                "isActive": true,
+                "isDeleted": false,
+                "createDate": "2023-09-02T12:00:00Z",
+                "deleteDate": null
+            };
+
+            const defaultQuantity = 20;
+
+            const response = await ProductService.addProduct(data, defaultQuantity);
+
+            const response2 = await StockService.searchStockByProductID(response.data._id);
+
+            expect(response2.status).to.equal(404);
+            expect(response2.error).to.be.true;
+
+            expect(response2).to.have.property('status');
+            expect(response2).to.have.property('error');
+            expect(response2).to.have.property('data');
+            expect(response2).to.have.property('message');
+
+            expect(response.status).to.equal(500);
+            expect(response.error).to.be.true;
+            expect(response).to.have.property('status');
+            expect(response).to.have.property('error');
+            expect(response).to.have.property('data');
+            expect(response).to.have.property('message');
+            expect(response.status).to.be.a('number');
+            expect(response.error).to.be.a('boolean');
+            expect(response.message).to.be.a('string');
+        });
+        
+    });
+
     describe('Search Product By ID', () => {
         it('should return Searched products', async function() {
             this.timeout(10000);
@@ -98,7 +138,25 @@ describe('Product Service', () => {
             expect(response.error).to.be.a('boolean');
             expect(response.message).to.be.a('string');
         });
-        
+    });
+
+    describe('Search Product By unexisting ID', () => {
+        it('should not return any products', async function() {
+            this.timeout(10000);
+
+            const response = await ProductService.searchProductByID('29ufn1923213jj31093n');
+       
+            expect(response.status).to.equal(500);
+            expect(response.error).to.be.true;
+
+            expect(response).to.have.property('status');
+            expect(response).to.have.property('error');
+            expect(response).to.have.property('data');
+            expect(response).to.have.property('message');
+            expect(response.status).to.be.a('number');
+            expect(response.error).to.be.a('boolean');
+            expect(response.message).to.be.a('string');
+        });
     });
 
     describe('Update product', () => {
@@ -143,9 +201,5 @@ describe('Product Service', () => {
             expect(response.error).to.be.a('boolean');
             expect(response.message).to.be.a('string');
         });
-        
     });
-
-
-
 });

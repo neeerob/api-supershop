@@ -47,7 +47,7 @@ describe('Receipt Service', () => {
             };
         
             const response = await ReceiptService.getAll(data);
-            receiptNumber = response.data[0]._id;
+            receiptNumber = response.data[1]._id;
             
             expect(response.status).to.equal(200);
             expect(response.error).to.be.false;
@@ -65,15 +65,33 @@ describe('Receipt Service', () => {
     });
 
     describe('Get receipt by ID', () => {
-        it('Should return an array of all Receipt', async function() {
+        it('Should return a Receipt', async function() {
             this.timeout(15000); 
         
             const data = receiptNumber;
         
-            const response = await ReceiptService.returnByReceiptNumber(data);
+            const response = await ReceiptService.returnByReceiptNumber('SCPT16940003672266927');
             
             expect(response.status).to.equal(200);
             expect(response.error).to.be.false;
+
+            expect(response).to.have.property('status');
+            expect(response).to.have.property('error');
+            expect(response).to.have.property('data');
+            expect(response).to.have.property('message');
+            expect(response.status).to.be.a('number');
+            expect(response.error).to.be.a('boolean');
+            expect(response.message).to.be.a('string');
+        });
+    });
+
+    describe('Get receipt by unexisting ID', () => {
+        it('Should not return any Receipt', async function() {
+            this.timeout(15000); 
+            const response = await ReceiptService.returnByReceiptNumber('k123nsknvk12jnfpe');
+            
+            expect(response.status).to.equal(404);
+            expect(response.error).to.be.true;
 
             expect(response).to.have.property('status');
             expect(response).to.have.property('error');
