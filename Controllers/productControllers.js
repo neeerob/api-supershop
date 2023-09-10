@@ -42,7 +42,10 @@ async function updateProduct (req, res) {
             return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
         }
     } catch (error) {
-        return res.status(500).json({ message: "Error calling service." });
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
     }
 }
 
@@ -58,7 +61,10 @@ async function deleteProduct (req, res){
             return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
         }
     } catch (error) {
-        return res.status(500).json({ message: "Error calling service." });
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
     }
 }
 
@@ -73,7 +79,10 @@ async function getAll(req, res) {
         return res.status(result.status).json({data: result.data, error: result.error, message: result.message });
       }
     } catch (error) {
-        return res.status(500).json({ error: true, message: "Error calling service." });
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
     }
 }
 
@@ -89,7 +98,10 @@ async function searchById (req, res){
             return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
           }
     } catch (error) {
-        return res.status(500).json({ message: "Error calling service." });
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
     }
 }
 
