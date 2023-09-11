@@ -31,14 +31,15 @@ POST  http://localhost:5000/product/add HTTP/1.1
 content-type: application/json
 
 {
-    "productName": "Pen",
-    "description": " description pen - 2",
+    "productName": "Pen v12",
+    "description": " description pen - 21",
     "price": 5,
     "status": true,
     "isActive": true,
     "isDeleted": false,
     "createDate": "2023-09-02T12:00:00Z",
     "deleteDate": null
+    
 }
 
 ## Usecase: The "Add Product" method is useful when you need to insert a new product into your system's database. You can use this method to provide all the necessary product details and create a new product entry.
@@ -61,11 +62,11 @@ content-type: application/json
 
 
 ## 64f71098810ca439775af62f is ID of a product
-PATCH http://localhost:5000/product/update/64f71098810ca439775af62f HTTP/1.1
+GET  http://localhost:5000/product/update/64f6d3947394d14786e2c242 HTTP/1.1
 Content-Type: application/json
 
 {
-    "description": "Updated phone - 16"
+    "description": "description TV - 3"
 }
 
 ## Usecase: The "Update Product" method is essential when you need to modify the attributes of an existing product in your system. It allows you to provide the updated information and ensures that product records remain up to date.
@@ -117,6 +118,32 @@ GET http://localhost:5000/product/64f71098810ca439775af62f HTTP/1.1
 
 ## Technical details
     ## This function utilizes the `Product.findById` method to search for and retrieve the product based on the provided ID. Upon successful execution, it returns a response containing the product data. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
+
+
+###
+## Module Name: Product
+## Module Code: 1.1
+## Method: Search Product by Key
+## Method Code: 1.1.6
+## Technical Description: This method allows you to search for a specific product in the system based on its unique identifier (ID). 
+
+
+POST http://localhost:5000/product/bykey HTTP/1.1
+content-type: application/json
+
+{
+    "key": "Pen v12"
+    
+}
+
+## Usecase: The "Search Product by Key" method is useful when you need to retrieve detailed information about a product in the system with productname or product discription. It provides a quick and efficient way to access the product's data by its unique identifier.
+
+##   Note: 
+    ## - Ensure that the `{key}` parameter in the URL.
+    ## - The search operation will return a "not found" error if the specified product ID does not exist in the system.
+
+##  Technical details
+    ## This function utilizes the `Product.find` method to search for and retrieve the product based on the provided ID. Upon successful execution, it returns a response containing the product data. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
 
 
 

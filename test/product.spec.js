@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../server');
+// const app = require('../server');
 const ProductService = require('../lib/productService/productService');
 const StockService = require('../lib/stockService/stockService')
 
@@ -126,6 +126,29 @@ describe('Product Service', () => {
             this.timeout(10000);
 
             const response = await ProductService.searchProductByID(productId);
+       
+            expect(response.status).to.equal(200);
+            expect(response.error).to.be.false;
+
+            expect(response).to.have.property('status');
+            expect(response).to.have.property('error');
+            expect(response).to.have.property('data');
+            expect(response).to.have.property('message');
+            expect(response.status).to.be.a('number');
+            expect(response.error).to.be.a('boolean');
+            expect(response.message).to.be.a('string');
+        });
+    });
+
+    describe('Search Product By Key', () => {
+        it('should return Searched products which have common name or discription', async function() {
+            this.timeout(10000);
+
+            const data = {
+                "key": "Pen v12"
+            }
+
+            const response = await ProductService.searchProductByKey(data);
        
             expect(response.status).to.equal(200);
             expect(response.error).to.be.false;

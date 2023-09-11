@@ -3,9 +3,9 @@
 ##########################################
 
 ## module name: Stock
-## Mdule Code: 1.2
+## Module Code: 4.1
 ## Method: Get All product
-## Method Code: 1.2.1
+## Method Code: 4.1.1
 ## Technical Description: This method allows you to retrieve a paginated list of all stock available in the system. It is designed to be accessed via a GET request using the following URL. The URL includes the `page` and `pageSize` query parameters, which can be used for pagination. The `page` parameter specifies the page number, and the `pageSize` parameter determines the number of products to display per page.
 
 GET http://localhost:5000/stock/all/?page=1&pageSize=3 HTTP/1.1 
@@ -24,9 +24,9 @@ GET http://localhost:5000/stock/all/?page=1&pageSize=3 HTTP/1.1
 
 ###
 ## Module Name: Stock
-## Module Code: 1.2
+## Module Code: 4.1
 ## Method: Search Stock by ID
-## Method Code: 1.2.2
+## Method Code: 4.1.2
 ## Technical Description: This method allows you to search for a specific stock in the system based on its unique identifier (ID). 
 
 ## 64f6d3947394d14786e2c244 is ID of a Stock
@@ -46,9 +46,9 @@ GET http://localhost:5000/stock/byid/64f6d3947394d14786e2c244 HTTP/1.1
 
 ###
 ## Module Name: Stock
-## Module Code: 1.2
+## Module Code: 4.1
 ## Method: Search Stock by Product ID
-## Method Code: 1.2.3
+## Method Code: 4.1.3
 ## Technical Description: This method allows you to search for a specific stock in the system based on Product's unique identifier (ID). 
 
 ## 64f6d5a7cd1aa0404ae344df is ID of a product
@@ -68,14 +68,14 @@ GET http://localhost:5000/stock/bypid/64f6d5a7cd1aa0404ae344df HTTP/1.1
 
 ###
 ## Module Name: Stock
-## Module Code: 1.2
+## Module Code: 4.1
 ## Method: Update Stock
-## Method Code: 1.1.4
+## Method Code: 4.1.4
 ## Technical Description: This method update a exissting Stock quantity in database.
 
 
 ## 64f6d3757394d14786e2c23e is ID of a product
-PUT http://localhost:5000/stock/updateStock/64f6d5a7cd1aa0404ae344df/2 HTTP/1.1
+POST http://localhost:5000/stock/updateStock/64f6d5a7cd1aa0404ae344df/2 HTTP/1.1
 Content-Type: application/json
 
 ## Usecase: The "Update Stock" method is essential when you need to modify the quantity of an existing product in your database. It allows you to provide the updated quantity and ensures that stock records remain up to date.

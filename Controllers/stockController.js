@@ -11,7 +11,6 @@ async function updateStock (req, res) {
         const stockQuantity  = req.params.quantity;
         const productId = req.params.product_id;
         const result = await stockServicce.updateStock(productId, stockQuantity);
-        console.log(result);
         if (!result.error) {
             return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
           } else {

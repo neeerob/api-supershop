@@ -105,10 +105,31 @@ async function searchById (req, res){
     }
 }
 
+async function searchByKey (req, res){
+    let result = null;
+    try {
+        let data = req.body;
+        console.log(data);
+        const result = await ProductService.searchProductByKey(data);
+        console.log(result);
+        if (!result.error) {
+            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
+          } else {
+            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
+          }
+    } catch (error) {
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
+    }
+}
+
 module.exports = {
     addProduct,
     getAll,
     updateProduct,
     deleteProduct,
-    searchById
+    searchById,
+    searchByKey
 };

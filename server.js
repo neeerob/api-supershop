@@ -5,7 +5,7 @@ const app = express();
 const router = require('./routeManager');
 
 app.get('/', (req, res) => {
-    res.send('Welcome');
+    res.send('Supershop Management by neeerob');
 })
 
 async function main() {
