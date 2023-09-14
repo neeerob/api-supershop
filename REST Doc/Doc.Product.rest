@@ -8,7 +8,7 @@
 ## Method Code: 1.1.1
 ## Technical Description: This method allows you to retrieve a paginated list of all products available in the system. It is designed to be accessed via a GET request using the following URL. The URL includes the `page` and `pageSize` query parameters, which can be used for pagination. The `page` parameter specifies the page number, and the `pageSize` parameter determines the number of products to display per page.
 
-GET http://localhost:5000/product/all?page=1&pageSize=2 HTTP/1.1 
+GET http://localhost:5000/product/all?page=1&pageSize=100 HTTP/1.1 
 
 ## Usecase: The "Get All Products" method is useful when you need to retrieve a list of products from your system, typically for display in a user interface or for further processing. By providing pagination parameters, you can efficiently manage large datasets.
 

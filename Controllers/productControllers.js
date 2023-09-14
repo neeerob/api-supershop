@@ -12,6 +12,7 @@ async function addProduct (req, res){
     let result = null;
     try {
         const data = req.body;
+        console.log(data);
         const quantityParam = req.params.quantity ? parseInt(req.params.quantity) : 0;
         result = await ProductService.addProduct(data, quantityParam);
         if (!result.error) {

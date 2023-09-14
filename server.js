@@ -3,10 +3,13 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const app = express();
 const router = require('./routeManager');
+const cors = require('cors');
 
 app.get('/', (req, res) => {
     res.send('Supershop Management by neeerob');
 })
+
+app.use(cors());
 
 async function main() {
     try {
