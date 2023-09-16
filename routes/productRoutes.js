@@ -6,7 +6,7 @@ router.use(express.json());
 
 router.get('/all', productController.getAll);
 router.post('/add/:quantity', productController.addProduct);
-router.get('/update/:id', productController.updateProduct);
+router.post('/update/:id', productController.updateProduct);
 router.delete('/delete/:id',productController.deleteProduct);
 router.get('/:id',productController.searchById);
 router.post('/bykey',productController.searchByKey);

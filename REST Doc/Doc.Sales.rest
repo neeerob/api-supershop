@@ -89,3 +89,28 @@ content-type: application/json
 ## Technical details: 
     ## This function retrieves sales data for a specific product within the specified date range. It validates parameters, checks product existence, and returns the sales data.
 
+
+
+
+###
+## module name: Sales
+## Mdule Code: 3.1
+## Method: Sales  by ID
+## Method Code: 3.1.5
+## Technical Description: This method generates a sales by id.
+
+GET http://localhost:5000/sales/getsalesbyid/65057d7117f7e8797688e14b HTTP/1.1
+content-type: application/json
+
+{
+  "productId": "64f6d77ff8a997c4594dec1c",
+  "startDate": "2023-01-01",
+  "endDate": "2023-12-31"
+}
+
+
+## Usecase: The "Sales by ID" method provides detailed sales information for a specific salesId.
+## note: 
+
+## Technical details: 
+    ## This function retrieves sales data for a specific saleiD.

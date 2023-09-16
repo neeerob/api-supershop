@@ -8,5 +8,6 @@ router.post("/registerSales/:discount",salesController.registerSales);
 router.get("/monthlySalesReport", salesController.monthlyReport);
 router.get("/yearlySalesReport", salesController.yearlyReport);
 router.get("/getSalesReportByDate", salesController.reportByDate);
+router.get('/getsalesbyid/:id', salesController.searchById);
 
 module.exports = router;

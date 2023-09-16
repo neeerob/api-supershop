@@ -161,6 +161,25 @@ async function registerSales (req, res) {
     }
 }
 
+async function searchById (req, res){
+    let result = null;
+    try {
+        let data = req.params.id;
+        const result = await SalesService.searchByID(data);
+        console.log(result);
+        if (!result.error) {
+            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
+          } else {
+            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
+          }
+    } catch (error) {
+        console.log(error)
+        let err = errorModel.internalServerError
+        result = {error: true , data: null , status: err.code, message: err.message}
+        return res.status(result.status).json(result);
+    }
+}
+
 function generateReceiptNumber() {
     const prefix = "SCPT"; 
     const timestamp = Date.now(); 
@@ -241,5 +260,6 @@ module.exports = {
     registerSales,
     monthlyReport,
     yearlyReport,
-    reportByDate
+    reportByDate,
+    searchById
 };
