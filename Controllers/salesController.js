@@ -2,15 +2,13 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Product = require("../models/productModel");
-const Sale = require('../models/salesModel');
-const Stock = require('../models/stocksModel');
-const Receipt = require('../models/receiptsModel')
-const SalesService = require('../lib/salesService/salesService');
-const errorModel = require('../utils/statusMessages');
-
+const Sale = require("../models/salesModel");
+const Stock = require("../models/stocksModel");
+const Receipt = require("../models/receiptsModel");
+const SalesService = require("../lib/salesService/salesService");
+const errorModel = require("../utils/statusMessages");
 
 router.use(express.json());
-
 
 // router.post("/registerSales/:discount?", async (req, res) => {
 //     try {
@@ -89,12 +87,12 @@ router.use(express.json());
 
 //                         //sale initialization
 //                         const sale = new Sale({
-//                             product_id: productId, 
+//                             product_id: productId,
 //                             quantitySold: quantitySold,
 //                             salePrice: salePrice,
 //                             costPrice: productPush.price,
 //                             date: new Date(),
-//                         });   
+//                         });
 //                         await sale.save();
 
 //                         //For view
@@ -117,7 +115,7 @@ router.use(express.json());
 //                     // Create a new receipt
 //                     const totalAmountCalculation = calculateTotalAmount(receiptItems);
 //                     const receiptData = {
-//                     receiptNumber: generateReceiptNumber(), 
+//                     receiptNumber: generateReceiptNumber(),
 //                     totalAmount: totalAmountCalculation,
 //                     discount: discount,
 //                     taxAmmount: totalAmountCalculation * 0.08,
@@ -141,125 +139,217 @@ router.use(express.json());
 
 //something wrong with sales
 
-async function registerSales (req, res) {
-    let result = null;
-    try {
-        let data = req.body;
-        let discount = req.params.discount;
-        const result = await SalesService.registerSales(data, discount);
-        if (!result.error) {
-            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
-        }
-        else{
-            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
-        }
-    } catch (error) {
-        console.log(error)
-        let err = errorModel.internalServerError
-        result = {error: true , data: null , status: err.code, message: err.message}
-        return res.status(result.status).json(result);
+async function registerSales(req, res) {
+  let result = null;
+  try {
+    let data = req.body;
+    let discount = req.params.discount;
+    const result = await SalesService.registerSales(data, discount);
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
 }
 
-async function searchById (req, res){
-    let result = null;
-    try {
-        let data = req.params.id;
-        const result = await SalesService.searchByID(data);
-        console.log(result);
-        if (!result.error) {
-            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
-          } else {
-            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
-          }
-    } catch (error) {
-        console.log(error)
-        let err = errorModel.internalServerError
-        result = {error: true , data: null , status: err.code, message: err.message}
-        return res.status(result.status).json(result);
+async function searchById(req, res) {
+  let result = null;
+  try {
+    let data = req.params.id;
+    const result = await SalesService.searchByID(data);
+    console.log(result);
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
+}
+
+async function deleteSale(req, res) {
+  let result = null;
+  try {
+    let data = req.params.id;
+    const result = await SalesService.deleteSale(data);
+    console.log(result);
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
 }
 
 function generateReceiptNumber() {
-    const prefix = "SCPT"; 
-    const timestamp = Date.now(); 
-    const randomDigits = Math.floor(Math.random() * 10000);
+  const prefix = "SCPT";
+  const timestamp = Date.now();
+  const randomDigits = Math.floor(Math.random() * 10000);
 
-    return `${prefix}${timestamp}${randomDigits}`;
+  return `${prefix}${timestamp}${randomDigits}`;
 }
 
 function calculateTotalAmount(receiptItems) {
-    let totalAmount = 0;
+  let totalAmount = 0;
 
-    for (const item of receiptItems) {
-        const { quantity, salePrice } = item;
-        totalAmount += quantity * salePrice;
-    }
+  for (const item of receiptItems) {
+    const { quantity, salePrice } = item;
+    totalAmount += quantity * salePrice;
+  }
 
-    return totalAmount;
+  return totalAmount;
 }
 
-async function monthlyReport(req, res){
-    let result = null;
-    try {
-        const result = await SalesService.monthlyReport();
-        if (!result.error) {
-            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
-        }
-        else{
-            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
-        }
-    } catch (error) {
-        console.log(error)
-        let err = errorModel.internalServerError
-        result = {error: true , data: null , status: err.code, message: err.message}
-        return res.status(result.status).json(result);
+async function monthlyReport(req, res) {
+  let result = null;
+  try {
+    const result = await SalesService.monthlyReport();
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
-
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
 }
 
-
-async function yearlyReport (req, res){
-    let result = null;
-    try {
-        const result = await SalesService.yearlyReport();
-        if (!result.error) {
-            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
-        }
-        else{
-            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
-        }
-    } catch (error) {
-        console.log(error)
-        let err = errorModel.internalServerError
-        result = {error: true , data: null , status: err.code, message: err.message}
-        return res.status(result.status).json(result);
+async function yearlyReport(req, res) {
+  let result = null;
+  try {
+    const result = await SalesService.yearlyReport();
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
 }
 
-async function reportByDate (req, res){
-    let result = null;
-    try {
-        const data = req.body;
-        const result = await SalesService.reportByDate(data);
-        if (!result.error) {
-            return res.status(result.status).json({data:result.data, error: result.error, message: result.message});
-        }
-        else{
-            return res.status(result.status).json({ data: result.data, error: result.error, message: result.message });
-        }
-    } catch (error) {
-        console.log(error)
-        let err = errorModel.internalServerError
-        result = {error: true , data: null , status: err.code, message: err.message}
-        return res.status(result.status).json(result);
+async function reportByDate(req, res) {
+  let result = null;
+  try {
+    const data = req.body;
+    const result = await SalesService.reportByDate(data);
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
 }
 
 module.exports = {
-    registerSales,
-    monthlyReport,
-    yearlyReport,
-    reportByDate,
-    searchById
+  registerSales,
+  monthlyReport,
+  yearlyReport,
+  reportByDate,
+  searchById,
+  deleteSale,
 };

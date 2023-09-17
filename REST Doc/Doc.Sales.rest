@@ -114,3 +114,27 @@ content-type: application/json
 
 ## Technical details: 
     ## This function retrieves sales data for a specific saleiD.
+
+
+###
+## module name: Sales
+## Mdule Code: 3.1
+## Method: delete  by ID
+## Method Code: 3.1.6
+## Technical Description: This method generates a delete by id.
+
+DELETE  http://localhost:5000/sales/deleteSale/6506a389d96ba17404593f4f HTTP/1.1
+content-type: application/json
+
+{
+  "productId": "64f6d77ff8a997c4594dec1c",
+  "startDate": "2023-01-01",
+  "endDate": "2023-12-31"
+}
+
+
+## Usecase: The "delete by ID" method delete a product for a specific salesId.
+## note: 
+
+## Technical details: 
+    ## This function delete sales data for a specific saleiD.
