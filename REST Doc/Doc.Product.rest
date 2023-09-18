@@ -120,6 +120,7 @@ GET http://localhost:5000/product/64f71098810ca439775af62f HTTP/1.1
     ## This function utilizes the `Product.findById` method to search for and retrieve the product based on the provided ID. Upon successful execution, it returns a response containing the product data. If the specified product is not found, it responds with a "not found" error. In case of any other errors during the search process, it provides an internal server error response.
 
 
+
 ###
 ## Module Name: Product
 ## Module Code: 1.1

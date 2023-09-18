@@ -10,7 +10,7 @@
 ## Method Code: 2.1.1
 ## Technical Description: This method retrieves all receipts in the system, excluding deleted receipts. It is accessed via a GET request to the appropriate endpoint.
 
-GET http://localhost:5000/receipt/getAllReceipt?page=1&pageSize=2 HTTP/1.1 
+GET http://localhost:5000/receipt/getAllReceipt?page=1&pageSize=10 HTTP/1.1 
 
 ## Usecase: The "Get All Receipts" method provides a comprehensive list of all receipts in the system, allowing for a full overview of sales transactions.
 
