@@ -54,8 +54,8 @@ content-type: application/json
 ## Method Code: 2.1.3
 ## Technical Description: This method allows you to retrieve a specific receipt by its unique receipt number. It is accessed via a GET request with the receipt number as a parameter.
 
-## SCPT16940003672266927 is ID of a product
-GET http://localhost:5000/receipt/getReceiptByReceiptNumber/SCPT16940003672266927 HTTP/1.1 
+## SCPT16949434065267652 is ID of a product
+GET http://localhost:5000/receipt/getReceiptByReceiptNumber/SCPT16949434065267652 HTTP/1.1 
 
 ## Usecase: The "Get Receipt by Receipt Number" method is useful when you need to access detailed information about a specific receipt using its unique identifier.
 
