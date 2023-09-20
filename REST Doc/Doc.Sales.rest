@@ -138,3 +138,20 @@ content-type: application/json
 
 ## Technical details: 
     ## This function delete sales data for a specific saleiD.
+
+
+###
+## module name: Sales
+## Mdule Code: 3.1
+## Method: Daily Sales Report
+## Method Code: 3.1.7
+## Technical Description: This method generates a daily sales report, aggregating sales data by daily and product. It calculates total revenue, units sold, and profits. It is accessed via a GET request to the appropriate endpoint.
+
+GET http://localhost:5000/sales/dailySalesReport HTTP/1.1
+
+## Usecase: The "daily Sales Report" method provides valuable insights into daily sales performance, helping businesses track trends and make data-driven decisions.
+## note: 
+    ## - N/A
+
+## Technical details: 
+    ## This function uses aggregation to group sales data by month and product. It calculates key metrics such as total revenue, units sold, and profits for each month. The results are returned as a comprehensive daily sales report.

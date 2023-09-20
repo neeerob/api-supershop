@@ -284,6 +284,36 @@ async function monthlyReport(req, res) {
   }
 }
 
+async function dailySalesReport(req, res) {
+  let result = null;
+  try {
+    const result = await SalesService.dailyReport();
+    if (!result.error) {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    } else {
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    let err = errorModel.internalServerError;
+    result = {
+      error: true,
+      data: null,
+      status: err.code,
+      message: err.message,
+    };
+    return res.status(result.status).json(result);
+  }
+}
+
 async function yearlyReport(req, res) {
   let result = null;
   try {
@@ -352,4 +382,5 @@ module.exports = {
   reportByDate,
   searchById,
   deleteSale,
+  dailySalesReport,
 };
