@@ -147,11 +147,11 @@ content-type: application/json
 ## Method Code: 3.1.7
 ## Technical Description: This method generates a daily sales report, aggregating sales data by daily and product. It calculates total revenue, units sold, and profits. It is accessed via a GET request to the appropriate endpoint.
 
-GET http://localhost:5000/sales/dailySalesReport HTTP/1.1
+POST http://localhost:5000/sales/dailySalesReport HTTP/1.1
 content-type: application/json
 
 {
-  "createDate": "2023-09-22"
+  "createDate": "2023-09-23"
 }
 
 ## Usecase: The "daily Sales Report" method provides valuable insights into daily sales performance, helping businesses track trends and make data-driven decisions.
