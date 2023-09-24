@@ -323,7 +323,9 @@ async function dailySalesReport(req, res) {
     const data = req.body;
     // console.log(req);
     // console.log(data.createDate);
-    const result = await SalesService.dailyReport(data.createDate);
+    // const result = await SalesService.dailyReport(data.createDate);
+    const result = await SalesService.pathDecider(data.createDate);
+
     if (!result.error) {
       return res.status(result.status).json({
         data: result.data,
