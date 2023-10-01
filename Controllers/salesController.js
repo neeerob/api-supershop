@@ -324,7 +324,11 @@ async function dailySalesReport(req, res) {
     // console.log(req);
     // console.log(data.createDate);
     // const result = await SalesService.dailyReport(data.createDate);
-    const result = await SalesService.pathDecider(data.createDate);
+    console.log(data);
+    const result = await SalesService.pathDecider(
+      data.createDate,
+      data.optional || "null"
+    );
 
     if (!result.error) {
       return res.status(result.status).json({
@@ -352,41 +356,15 @@ async function dailySalesReport(req, res) {
   }
 }
 
-async function yearlyReport(req, res) {
-  let result = null;
-  try {
-    const result = await SalesService.yearlyReport();
-    if (!result.error) {
-      return res.status(result.status).json({
-        data: result.data,
-        error: result.error,
-        message: result.message,
-      });
-    } else {
-      return res.status(result.status).json({
-        data: result.data,
-        error: result.error,
-        message: result.message,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    let err = errorModel.internalServerError;
-    result = {
-      error: true,
-      data: null,
-      status: err.code,
-      message: err.message,
-    };
-    return res.status(result.status).json(result);
-  }
-}
-
-async function reportByDate(req, res) {
+async function reportMonthly(req, res) {
   let result = null;
   try {
     const data = req.body;
-    const result = await SalesService.reportByDate(data);
+    // console.log(data);
+    // console.log(data.createDate);
+    // const result = await SalesService.dailyReport(data.createDate);
+    const result = await SalesService.monthlyDataSales(data);
+
     if (!result.error) {
       return res.status(result.status).json({
         data: result.data,
@@ -412,13 +390,73 @@ async function reportByDate(req, res) {
     return res.status(result.status).json(result);
   }
 }
+
+// async function yearlyReport(req, res) {
+//   let result = null;
+//   try {
+//     const result = await SalesService.yearlyReport();
+//     if (!result.error) {
+//       return res.status(result.status).json({
+//         data: result.data,
+//         error: result.error,
+//         message: result.message,
+//       });
+//     } else {
+//       return res.status(result.status).json({
+//         data: result.data,
+//         error: result.error,
+//         message: result.message,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     let err = errorModel.internalServerError;
+//     result = {
+//       error: true,
+//       data: null,
+//       status: err.code,
+//       message: err.message,
+//     };
+//     return res.status(result.status).json(result);
+//   }
+// }
+
+// async function reportByDate(req, res) {
+//   let result = null;
+//   try {
+//     const data = req.body;
+//     const result = await SalesService.reportByDate(data);
+//     if (!result.error) {
+//       return res.status(result.status).json({
+//         data: result.data,
+//         error: result.error,
+//         message: result.message,
+//       });
+//     } else {
+//       return res.status(result.status).json({
+//         data: result.data,
+//         error: result.error,
+//         message: result.message,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     let err = errorModel.internalServerError;
+//     result = {
+//       error: true,
+//       data: null,
+//       status: err.code,
+//       message: err.message,
+//     };
+//     return res.status(result.status).json(result);
+//   }
+// }
 
 module.exports = {
   registerSales,
   monthlyReport,
-  yearlyReport,
-  reportByDate,
   searchById,
   deleteSale,
   dailySalesReport,
+  reportMonthly,
 };
