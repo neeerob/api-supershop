@@ -75,7 +75,7 @@ GET http://localhost:5000/receipt/getReceiptByReceiptNumber/SCPT1694943406526765
 ## Technical Description: This method allows you to process returns for a receipt, undoing the associated sales and updating stock quantities. It is accessed via a POST request to the appropriate endpoint.
 
 ## SCPT16940004059355870 is ID of a product
-GET http://localhost:5000/receipt/retrnPrdt/SCPT16939135064734804 HTTP/1.1 
+GET http://localhost:5000/receipt/retrnPrdt/SCPT16962286142053372 HTTP/1.1 
 
 ## Usecase: The "Return Receipt" method is used to process returns for a receipt, effectively reversing the associated sales and adjusting stock quantities accordingly.
 
