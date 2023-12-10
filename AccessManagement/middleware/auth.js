@@ -4,11 +4,12 @@ const crypto = require("crypto");
 const bodyParser = require("body-parser");
 const { Session } = require("inspector");
 const userCollection = "Users";
-const authSession = "Sessions";
+const authSession = "sessions";
 const { request } = require("http");
 const { db } = require("../../lib/database");
 const userView = require("./../core/services/auth/user.view");
 const statusCode = require("../core/status/statusCode");
+const { ObjectId } = require("mongodb");
 
 async function createFinger(fingerprint) {
   const hashedFingerprint = crypto
@@ -77,8 +78,10 @@ const authMiddleware = async (req, res, next) => {
       // console.log("sessionId - 1", sessionId);
       // let session = await SessionCollection.findOne({ _id: sessionId });
       let key = sessionId;
+      key = new ObjectId(key);
       // console.log("key - 1", key);
       let session = await db.collection(authSession).findOne(key);
+      // console.log("session", session);
       // console.log("session", session);
       if (session.error === false) {
         let currentTimestamp = new Date();
@@ -95,8 +98,10 @@ const authMiddleware = async (req, res, next) => {
           let user = await db
             .collection(userCollection)
             .findOne({ username: session.data.username }, userView);
+          // console.log("user", user);
           if (user.error === false) {
             req.user = user.data;
+            // console.log("req.user", req.user);
             return next();
           } else {
             return res.status(statusCode.unAuthorized).send({

@@ -4,7 +4,7 @@ const { db } = require("../../../../lib/database");
 const authView = require("./auth.view");
 const { duplicate } = require("../duplication");
 const userCollection = "Users";
-const authSession = "Sessions";
+const authSession = "sessions";
 const bcrypt = require("bcrypt");
 const config = process.env;
 const crypto = require("crypto");
@@ -12,7 +12,21 @@ const jwt = require("jsonwebtoken");
 const userView = require("./user.view");
 const userType = require("./user.type");
 const companyView = require("./company.view");
+const { ObjectId } = require("mongodb");
+const mongoose = require("mongoose");
 // const companyService = require("./../../../../core/services/settings/company");
+
+const authSessionSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  ipAddress: { type: String, required: true },
+  userAgent: { type: String, required: true },
+  createTimestamp: { type: Date, default: Date.now() },
+  expireTimestamp: { type: Date, required: true },
+  flag: { type: Boolean, default: false },
+});
+
+// Define your model
+const AuthSession = mongoose.model("sessions", authSessionSchema);
 
 async function createFingerprint(fingerprint) {
   const hashedFingerprint = crypto
@@ -22,30 +36,71 @@ async function createFingerprint(fingerprint) {
   return hashedFingerprint;
 }
 
+// async function createSession(username, ip, agent) {
+//   try {
+//     let ifExist = await db
+//       .collection(authSession)
+//       .findOne({ username: username.toLowerCase() });
+//     if (ifExist.error === false) {
+//       ifExist.data.expireTimestamp = new Date(+new Date() + 100 * 60 * 1000);
+//       let expireTimestamp = ifExist.data.expireTimestamp;
+//       // let key = ifExist.data._id.toString();
+//       let key = ifExist.data._id;
+//       console.log("key", key);
+//       console.log("ifExist", ifExist.data);
+//       const filter = { _id: key };
+//       const updateExp = await db
+//         .collection(authSession)
+//         .updateOne(filter, { $set: ifExist.data });
+
+//       // console.log(updateExp);
+//       return ifExist.data._id;
+//     } else {
+//       const session = await db.collection(authSession).insert({
+//         username: username.toLowerCase(),
+//         ipAddress: ip,
+//         userAgent: agent,
+//         createTimestamp: Date.now(),
+//         expireTimestamp: new Date(+new Date() + 100 * 60 * 1000), //change sessionn time here
+//         flag: false,
+//       });
+//       return session.data._id.toString();
+//     }
+//   } catch (error) {
+//     console.error("Session creation failed:", error);
+//     return null;
+//   }
+// }
+
 async function createSession(username, ip, agent) {
   try {
-    let ifExist = await db
-      .collection(authSession)
-      .findOne({ username: username.toLowerCase() });
-    if (ifExist.error === false) {
-      ifExist.data.expireTimestamp = new Date(+new Date() + 100 * 60 * 1000);
-      let key = ifExist.data._id;
-      console.log(key);
-      const updateExp = await db
-        .collection(authSession)
-        .update(key, ifExist.data);
-      // console.log(updateExp);
-      return ifExist.data._id;
+    let ifExist = await AuthSession.findOne({
+      username: username.toLowerCase(),
+    });
+
+    if (ifExist) {
+      // Session exists, update expiration timestamp
+      ifExist.expireTimestamp = new Date(+new Date() + 100 * 60 * 1000);
+      let expireTimestamp = ifExist.expireTimestamp;
+      console.log("key", ifExist._id);
+      console.log("ifExist", ifExist);
+
+      // Save the updated session
+      await ifExist.save();
+
+      return ifExist._id;
     } else {
-      const session = await db.collection(authSession).insert({
+      // Session doesn't exist, create a new one
+      const session = await AuthSession.create({
         username: username.toLowerCase(),
         ipAddress: ip,
         userAgent: agent,
         createTimestamp: Date.now(),
-        expireTimestamp: new Date(+new Date() + 100 * 60 * 1000), //change sessionn time here
+        expireTimestamp: new Date(+new Date() + 100 * 60 * 1000), // change session time here
         flag: false,
       });
-      return session.data._id.toString();
+
+      return session._id.toString();
     }
   } catch (error) {
     console.error("Session creation failed:", error);
