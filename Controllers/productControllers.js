@@ -10,6 +10,7 @@ router.use(express.json());
 async function addProduct(req, res) {
   let result = null;
   try {
+    console.log(req.body);
     const data = req.body;
     // console.log(data);
     const quantityParam = req.params.quantity

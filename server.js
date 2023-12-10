@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const app = express();
 const router = require("./routeManager");
 const cors = require("cors");
+const dbHelper = require("./helpers/dbHelper");
+const mongoDB = require("./database/mongoDB")();
+const dataPipe = require("./middleware/mongodb.middleware")(mongoDB);
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Supershop Management by neeerob");
@@ -14,6 +18,10 @@ app.use(cors());
 async function main() {
   try {
     this.app = app;
+    this.dbCall = "databaseCall";
+    app.on(this.dbCall, async (...args) => {
+      return await dbHelper(dataPipe, ...args);
+    });
     router();
   } catch (err) {
     console.log(err);
