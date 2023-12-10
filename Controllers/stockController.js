@@ -12,21 +12,17 @@ async function updateStock(req, res) {
     const productId = req.params.product_id;
     const result = await stockServicce.updateStock(productId, stockQuantity);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -46,23 +42,19 @@ async function searchById(req, res) {
   try {
     let data = req.params.id;
     const result = await stockServicce.searchStockByID(data);
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -82,23 +74,19 @@ async function searchByProductId(req, res) {
   try {
     let data = req.params.id;
     const result = await stockServicce.searchStockByProductID(data);
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -119,21 +107,17 @@ async function getAll(req, res) {
     let data = req.query;
     const result = await stockServicce.getAllStocks(data);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);

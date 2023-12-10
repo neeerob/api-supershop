@@ -11,19 +11,17 @@ async function addProduct(req, res) {
   let result = null;
   try {
     const data = req.body;
-    console.log(data);
+    // console.log(data);
     const quantityParam = req.params.quantity
       ? parseInt(req.params.quantity)
       : 0;
     result = await ProductService.addProduct(data, quantityParam);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
       return res.status(result.status).json(result);
     }
@@ -47,21 +45,17 @@ async function updateProduct(req, res) {
     let data = req.body;
     const result = await ProductService.updateProduct(Id, data);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -82,21 +76,17 @@ async function deleteProduct(req, res) {
     let data = req.params.id;
     const result = await ProductService.deleteProduct(data);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -117,21 +107,17 @@ async function getAll(req, res) {
     let data = req.query;
     const result = await ProductService.getAllProducts(data);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -151,23 +137,19 @@ async function searchById(req, res) {
   try {
     let data = req.params.id;
     const result = await ProductService.searchProductByID(data);
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);
@@ -186,25 +168,21 @@ async function searchByKey(req, res) {
   let result = null;
   try {
     let data = req.body;
-    console.log(data);
+    // console.log(data);
     const result = await ProductService.searchProductByKey(data);
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     } else {
-      return res
-        .status(result.status)
-        .json({
-          data: result.data,
-          error: result.error,
-          message: result.message,
-        });
+      return res.status(result.status).json({
+        data: result.data,
+        error: result.error,
+        message: result.message,
+      });
     }
   } catch (error) {
     console.log(error);

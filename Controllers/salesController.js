@@ -145,6 +145,7 @@ async function registerSales(req, res) {
     let data = req.body;
     let discount = req.params.discount;
     const result = await SalesService.registerSales(data, discount);
+    console.log("result", result);
     if (!result.error) {
       return res.status(result.status).json({
         data: result.data,
@@ -324,7 +325,7 @@ async function dailySalesReport(req, res) {
     // console.log(req);
     // console.log(data.createDate);
     // const result = await SalesService.dailyReport(data.createDate);
-    console.log(data);
+    // console.log(data);
     const result = await SalesService.pathDecider(
       data.createDate,
       data.optional || "null"
