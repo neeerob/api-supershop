@@ -24,7 +24,7 @@ module.exports = {
   async Login(req, res) {
     try {
       let auth = {};
-      console.log("data", req.body);
+      // console.log("data", req.body);
       const response = await Login(req.body, req, auth);
       return res.status(response.status).json(response);
     } catch (error) {

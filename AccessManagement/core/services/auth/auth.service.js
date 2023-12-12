@@ -82,8 +82,8 @@ async function createSession(username, ip, agent) {
       // Session exists, update expiration timestamp
       ifExist.expireTimestamp = new Date(+new Date() + 100 * 60 * 1000);
       let expireTimestamp = ifExist.expireTimestamp;
-      console.log("key", ifExist._id);
-      console.log("ifExist", ifExist);
+      // console.log("key", ifExist._id);
+      // console.log("ifExist", ifExist);
 
       // Save the updated session
       await ifExist.save();
