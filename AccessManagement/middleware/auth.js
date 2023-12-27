@@ -102,6 +102,7 @@ const authMiddleware = async (req, res, next) => {
           if (user.error === false) {
             req.user = user.data;
             // console.log("req.user", req.user);
+            console.log("Access granted");
             return next();
           } else {
             return res.status(statusCode.unAuthorized).send({

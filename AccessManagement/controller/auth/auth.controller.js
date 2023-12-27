@@ -120,6 +120,7 @@ module.exports = {
     try {
       let auth = {};
       const response = await profile(req.user, auth);
+      console.log("profile", response);
       return res.status(response.status).json(response);
     } catch (error) {
       console.error(error);
