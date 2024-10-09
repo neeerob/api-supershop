@@ -34,7 +34,7 @@ main();
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    "mongodb+srv://admin:Nirob112233@nirobapi.xojpsay.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb://localhost:27017/?directConnection=true"
   )
   .then(() => {
     router();
